@@ -6,6 +6,7 @@ import { ProductFormModalService } from 'src/app/core/services/productFormModal/
 import { Router } from '@angular/router';
 import FORM from 'src/app/config/dataTest/form.json';
 import { DataManagementService } from 'src/app/core/services/dataManagement/data-management.service';
+import { RouterWorflowService } from 'src/app/core/services/router-workflow/router-worflow.service';
 
 @Component({
   selector: 'app-form-modal',
@@ -28,7 +29,6 @@ export class FormModalComponent implements OnInit {
       title: [],
       header: [],
       placeholders: [],
-      footer: [],
       buttons: []
     }
   }
@@ -37,13 +37,13 @@ export class FormModalComponent implements OnInit {
     private productFormService: ProductFormModalService,
     private formBuilder: FormBuilder,
     public router: Router,
-    private dataManagementService: DataManagementService
+    private dataManagementService: DataManagementService,
+    private  workflowSrv: RouterWorflowService
   ) { }
 
   ngOnInit(): void {
     this.initializeForm();
     this.initializeData();
-    this.getData();
   }
 
   private initializeData(): void {
@@ -66,39 +66,11 @@ export class FormModalComponent implements OnInit {
   private initializeForm(): void {
     this.sectionInput = false;
     this.registerForm = this.formBuilder.group({
-      nameProduct: ['', Validators.required],
-      reference: ['', Validators.required],
-      category: ['', Validators.required],
-      description: ['', Validators.required],
-      quantity: ['', Validators.required],
-      price: ['', Validators.required],
-      discount: ['', Validators.required],
-      image: []
+      idEmployee: ['', Validators.required],
+      fullname: ['', Validators.required],
+      occupation: ['', Validators.required],
+      idBoss: ['', Validators.required]
     });
-    this.inventoryForm = this.formBuilder.group({
-      invoiceNumber: [],
-      inputAmount: [],
-      invoicedAmount: [],
-      reference: []
-    });
-  }
-
-  private getData(): void {
-    this.categories = JSON.parse(localStorage.getItem("categories"));
-  }
-
-  public captureImage(event): void {
-    // this.registerForm.get('image').setValue(event.target.files[0]);
-  }
-
-  public onUpload(e): void {
-    const id = Math.random().toString(36).substring(2); // generar id random para la imagen
-    const file = e.target;
-  }
-
-  public onChange(e): void {
-    this.category = e.target.value;
-    console.log('category', this.category);
   }
 
   public getTexts(): void {
@@ -109,14 +81,16 @@ export class FormModalComponent implements OnInit {
 
   public onClick(state): void {
     this.sectionInput = true;
-    this.activateInput = (state == 'new') ? false : true;
+    this.activateInput = (state == 'add') ? false : true;
     this.getTexts();
+    if (this.activateInput) {
+      this.router.navigate(['/employees']);
+      this.onClose(false);
+    }
   }
 
   public validateForm() {
-    let valueFormInventory = this.inventoryForm.value;
-    return (this.registerForm.valid || valueFormInventory.inputAmount) ? false : true;
-    // return (this.registerForm.valid && this.registerForm.get('image').value) ? false : true;
+    return (this.registerForm.valid) ? false : true;
   }
 
   public onClose(state): void {
@@ -125,19 +99,17 @@ export class FormModalComponent implements OnInit {
       activateInput: false
     });
     this.initializeForm();
+    this.router.navigate(['/employees']);
   }
 
   public onCall(): void {
     let valueForm = this.registerForm.value;
-    let valueFormInventory = this.inventoryForm.value;
-    console.log('register form', valueForm, valueFormInventory);
-    const id = Math.random().toString(36).substring(2);
-    // this.requestsService.saveData(valueForm, id, this.requestsService.getCollection(this.category));
-    // if (valueFormInventory.inputAmount) {
-    //   this.requestsService.saveData(valueFormInventory, id, this.requestsService.getCollection('inputs'));
-    // }
+    console.log('register form', valueForm);
+    this.workflowSrv.createEmployee(valueForm).subscribe((response) => {
+      console.log('CREATE ENPLOYEE', response);
+    });
     this.initializeForm();
     this.onClose(false);
-    this.router.navigate(['/']);
+    this.router.navigate(['/employees']);
   }
 }

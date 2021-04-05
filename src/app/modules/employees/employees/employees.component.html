@@ -36,7 +36,8 @@
                     {{employee[columns.field]}}
                 </td>
                 <td >
-                    <i class="far fa-edit"></i>
+                    <i class="far fa-edit m-2" (click)="onAction('edit', employee)"></i>
+                    <i class="far fa-trash-alt m-2" (click)="onAction('delete', employee)"></i>
                 </td>
             </tr>
         </tbody>

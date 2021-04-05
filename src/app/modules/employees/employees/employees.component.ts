@@ -36,24 +36,10 @@ export class EmployeesComponent implements OnInit {
 
   ngOnInit(): void {
     this.dataManagementSrv.organizeDataView('texts', EMPLOYEES.dataTable, this.dataView.parametricTexts);
-    console.log('TEXTOS', this.dataView.parametricTexts)
     this.workflowSrv.getEmployes().subscribe((employees) => {
       this.employeesRegistered = employees;
       console.log('ENPLOYEES', employees);
     });
-    // this.workflowSrv.getEmployes().subscribe((employee) => {
-    //   console.log('ENPLOYEE', employee);
-    // });
-    // this.workflowSrv.createEmployee(this.employee).subscribe((response) => {
-    //   console.log('CREATE ENPLOYEE', response);
-    // });
-    // this.workflowSrv.editEmployee('3', this.employee).subscribe((response) => {
-    //   console.log('CREATE ENPLOYEE', response);
-    // });
-    // this.workflowSrv.deleteEmployee('1840').subscribe((response) => {
-    //   console.log('CREATE ENPLOYEE', response);
-    // });
-
   }
 
   public onInputHandler(event) {
@@ -63,8 +49,30 @@ export class EmployeesComponent implements OnInit {
   public showForm(state) {
     this.productFormService.showModal({
       activateModal: state,
-      activateInput: true
+      activateInput: false
     });
+  }
+
+  public onAction(action, data): void {
+    console.log(action, data);
+    if (action === "edit") {
+      this.workflowSrv.getEmployesById(data.idEmployee).subscribe((employee) => {
+        console.log('GET ENPLOYEE', employee);
+      });
+      this.workflowSrv.editEmployee(data.id, data).subscribe((response) => {
+        console.log('EDIT ENPLOYEE', response);
+      });
+
+      this.productFormService.showModal({
+        activateModal: true,
+        activateInput: false
+      });
+
+    } else {
+      this.workflowSrv.deleteEmployee(data.idEmployee).subscribe((response) => {
+        console.log('DELETE ENPLOYEE', response);
+      });
+    }
   }
 
 }

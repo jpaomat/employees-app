@@ -11,7 +11,7 @@ export class HomeComponent implements OnInit {
   constructor(
     private productFormService: ProductFormModalService
   ) {
-   }
+  }
 
   ngOnInit(): void {
     this.showForm(true);
