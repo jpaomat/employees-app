@@ -1,0 +1,43 @@
+{
+    "dataTable": [
+        {
+            "header": [
+                {
+                    "title": [
+                        {
+                            "T001": "EMPLEADOS REGISTRADOS"
+                        }
+                    ]
+                },
+                {
+                    "search": [
+                        {
+                            "placeholder": "Buscar producto",
+                            "tooltip": "Ingrese la referencia del producto"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "table": [
+                {
+                    "label": "# Empleado",
+                    "field": "idEmployee"
+                },
+                {
+                    "label": "Nombre",
+                    "field": "fullname"
+                },
+                {
+                    "label": "Cargo",
+                    "field": "occupation"
+                },
+                {
+                    "label": "ID Jefe inmediato",
+                    "field": "idBoss"
+                }
+            ]
+        }
+    ]
+}

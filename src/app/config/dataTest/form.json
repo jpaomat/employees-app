@@ -1,0 +1,59 @@
+{
+    "form": [
+        {
+            "title": [
+                {
+                    "index": "1",
+                    "text": "Agregar nuevo producto"
+                },
+                {
+                    "index": "2",
+                    "text": "Agregar nueva entrada"
+                }
+            ]
+        },
+        {
+            "header": [
+                {
+                    "index": "1",
+                    "text": "Por favor ingrese los siguientes datos para registrar un nuevo producto (todos los campos son obligatorios):"
+                },
+                {
+                    "index": "2",
+                    "text": "Si el producto no existe, tendrá que agregarlo antes de añadir una entrada"
+                }
+            ]
+        },
+        {
+            "placeholders": [
+                {
+                    "text1": "Nombre del producto",
+                    "text2": "Referencia",
+                    "text3": "Seleccione",
+                    "text4": "Descripción",
+                    "text5": "Cantidad",
+                    "text6": "Precio",
+                    "text7": "Descuento",
+                    "text8": "Número factura"
+                }
+            ]
+        },
+        {
+            "footer": [
+                {
+                    "index": "1",
+                    "text": "Campos para hacer registro en inventario:"
+                }
+            ]
+        },
+        {
+            "buttons": [
+                {
+                    "labelbtn1": "Guardar",
+                    "labelbtn2": "Producto nuevo",
+                    "labelbtn3": "Producto existente"
+                }
+            ]
+        }
+    ]
+}

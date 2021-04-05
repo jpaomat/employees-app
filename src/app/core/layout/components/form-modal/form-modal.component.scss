@@ -1,0 +1,26 @@
+p,
+label,
+input {
+  font-size: 14px;
+}
+
+.btn-image {
+  background-color: #ceb6f5b7 !important;
+  border-radius: 3px !important;
+}
+
+.buttonsInput{
+    justify-content: space-around;
+}
+.btn-outline-success {
+  color: #aa8bdbb7;
+  border-color: #aa8bdbb7;
+}
+.btn-outline-success:hover, .btn-outline-success:not(:disabled):not(.disabled):active {
+  color: #fff;
+  background-color: #aa8bdbb7;
+  border-color: #aa8bdbb7;
+}
+.btn-outline-success:focus, .btn-outline-success.focus {
+  box-shadow: 0 0 0 0.2rem #aa8bdbb7;
+}

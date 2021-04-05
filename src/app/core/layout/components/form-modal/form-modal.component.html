@@ -1,0 +1,106 @@
+<section *ngIf="showModal" class="modalContainer modalContainer--isShow" id="contCanguro">
+    <div class="contMain">
+        <div class="modal-header">
+            <h5 class="modal-title" id="modal-basic-title" [innerHTML]="title"></h5>
+            <button type="button" class="close" aria-label="Close" (click)="onClose(false)">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <p class="mb-4" [innerHTML]="header"></p>
+            <div *ngIf="activateInput && !sectionInput" class="d-flex align-items-center buttonsInput p-6">
+                <button type="button" class="btn btn-lg btn-outline-secondary" (click)="onClick('new')">
+                    {{dataView.parametricTexts.buttons[0].labelbtn2}}
+                </button>
+                <button type="button" class="btn btn-lg btn-outline-success" (click)="onClick('existent')">
+                    {{dataView.parametricTexts.buttons[0].labelbtn3}}
+                </button>
+            </div>
+            <form [formGroup]="registerForm">
+                <div *ngIf="!activateInput">
+                    <div class="row form-group content-center">
+                        <div class="col-md-6">
+                            <input type="text" class="form-control"
+                                [placeholder]="dataView.parametricTexts.placeholders[0].text1"
+                                formControlName="nameProduct">
+                        </div>
+                        <div class="col-md-3">
+                            <input type="text" class="form-control"
+                                [placeholder]="dataView.parametricTexts.placeholders[0].text2"
+                                formControlName="reference">
+                        </div>
+                        <div class="col-md-3">
+                            <select id="world" name="world" class="form-control" formControlName="category"
+                                (change)="onChange($event)">
+                                <option selected> {{dataView.parametricTexts.placeholders[0].text3}}</option>
+                                <option *ngFor="let category of categories">
+                                    {{category}}
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row form-group content-center">
+                        <div class="col-md-9">
+                            <input type="text" class="form-control"
+                                [placeholder]="dataView.parametricTexts.placeholders[0].text4"
+                                formControlName="description">
+                        </div>
+                        <div class="col-md-3">
+                            <input type="text" class="form-control"
+                                [placeholder]="dataView.parametricTexts.placeholders[0].text5"
+                                formControlName="quantity">
+                        </div>
+                    </div>
+                    <div class="row form-group content-center">
+                        <div class="col-md-3">
+                            <input type="text" class="form-control"
+                                [placeholder]="dataView.parametricTexts.placeholders[0].text6" formControlName="price">
+                        </div>
+                        <div class="col-md-3">
+                            <input type="text" class="form-control"
+                                [placeholder]="dataView.parametricTexts.placeholders[0].text7"
+                                formControlName="discount">
+                        </div>
+                        <div class="col-md-6">
+                            <input type="file" class="col-sm-12 btn-image py-1 content-center"
+                                accept=".png, .jpg, .jpeg" (change)="captureImage($event)">
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <form action="" [formGroup]="inventoryForm">
+                <div *ngIf="sectionInput">
+                    <p [innerHTML]="dataView.parametricTexts.footer[0].text"></p>
+                    <hr>
+                    <div class="row form-group content-center">
+                        <div class="col-md-3">
+                            <input type="text" class="form-control"
+                                [placeholder]="dataView.parametricTexts.placeholders[0].text8"
+                                formControlName="invoiceNumber">
+                        </div>
+                        <div class="col-md-3">
+                            <input type="text" class="form-control"
+                                [placeholder]="dataView.parametricTexts.placeholders[0].text2"
+                                formControlName="reference">
+                        </div>
+                        <div class="col-md-3">
+                            <input type="text" class="form-control"
+                                [placeholder]="dataView.parametricTexts.placeholders[0].text5"
+                                formControlName="inputAmount">
+                        </div>
+                        <div class="col-md-3">
+                            <input type="text" class="form-control"
+                                [placeholder]="dataView.parametricTexts.placeholders[0].text6"
+                                formControlName="invoicedAmount">
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="modal-footer" *ngIf="!activateInput || sectionInput">
+            <button type="button" class="btn btn-outline-info" [disabled]="validateForm()" (click)="onCall()">
+                {{dataView.parametricTexts.buttons[0].labelbtn1}}
+            </button>
+        </div>
+    </div>
+</section>

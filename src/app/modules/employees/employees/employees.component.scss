@@ -1,0 +1,26 @@
+.withoutStock {
+    color: red;
+  }
+  
+  .input {
+    width: 300px;
+  }
+  
+  .tooltipp {
+    border: none;
+    right: 0;
+    margin: 5px 45px 2px 2px;
+    position: absolute;
+    padding: 0
+  }
+  
+  .tooltipp:not(:disabled):not(.disabled):hover {
+    color: #6c757d;
+    background-color: #fff;
+    border-color: #fff;
+  }
+  
+  .containerSection {
+    height: 70vh;
+  }
+  

@@ -1,0 +1,54 @@
+<section class="containerSection">
+    <div class="d-flex justify-content-between align-items-center headerTable">
+        <div class="">
+            <h5 [innerHTML]="dataView.parametricTexts.header[0].title[0].T001"></h5>
+        </div>
+        <div class="input">
+            <div class="input-group">
+                <input type="text" class="form-control"
+                    [placeholder]="dataView.parametricTexts.header[1].search[0].placeholder"
+                    (input)="onInputHandler($event)">
+                <button class="btn btn-outline-secondary tooltipp" type="button" placement="top"
+                    [ngbTooltip]="dataView.parametricTexts.header[1].search[0].tooltip">
+                    <i class="fas fa-question-circle"></i>
+                </button>
+                <button class="btn btn-outline-secondary" type="button">
+                    <i class="fas fa-search"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+    <hr>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col" *ngFor="let columns of dataView.parametricTexts.table">
+                    {{columns.label}}
+                </th>
+                <th>
+                    Editar
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let employee of employeesRegistered | filter: filterEmployee; let i= index">
+                <td *ngFor="let columns of dataView.parametricTexts.table">
+                    {{employee[columns.field]}}
+                </td>
+                <td >
+                    <i class="far fa-edit"></i>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="d-flex justify-content-between align-items-center footerTable addProduct" (click)="showForm(true)">
+        <div class="">
+            <P>
+                Agregar otro empleado
+            </P>
+        </div>
+        <div class="addProduct">
+            <i class="fas fa-plus-circle"></i>
+        </div>
+    </div>
+</section>

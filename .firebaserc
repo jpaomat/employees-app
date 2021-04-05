@@ -1,0 +1,18 @@
+{
+  "targets": {
+    "store-todo1": {
+      "hosting": {
+        "store-todo1": [
+          "store-todo1"
+        ]
+      }
+    },
+    "store-todo1-9b3fd": {
+      "hosting": {
+        "store-todo1": [
+          "store-todo1-9b3fd"
+        ]
+      }
+    }
+  }
+}
