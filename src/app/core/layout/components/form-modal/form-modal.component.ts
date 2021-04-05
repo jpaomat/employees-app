@@ -131,7 +131,6 @@ export class FormModalComponent implements OnInit {
     } else {
       this.workflowSrv.getEmployesById(valueForm.idEmployee).subscribe((response) => {
         if (response[0]) {
-          console.log(`El usuario con número de empleado ${response[0].idEmployee} ya existe`);
           this.activateMessages = `El usuario con número de empleado ${response[0].idEmployee} ya existe`;
         } else {
           this.workflowSrv.createEmployee(valueForm).subscribe((response) => {
@@ -140,8 +139,8 @@ export class FormModalComponent implements OnInit {
         }
       });
     }
-    // this.initializeForm();
-    // this.onClose(false);
-    // this.router.navigate(['/f']);
+    this.initializeForm();
+    this.onClose(false);
+    this.router.navigate(['/f']);
   }
 }
