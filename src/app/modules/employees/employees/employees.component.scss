@@ -1,26 +1,42 @@
 .withoutStock {
-    color: red;
-  }
-  
-  .input {
-    width: 300px;
-  }
-  
-  .tooltipp {
-    border: none;
-    right: 0;
-    margin: 5px 45px 2px 2px;
-    position: absolute;
-    padding: 0
-  }
-  
-  .tooltipp:not(:disabled):not(.disabled):hover {
-    color: #6c757d;
-    background-color: #fff;
-    border-color: #fff;
-  }
-  
-  .containerSection {
-    height: 70vh;
-  }
-  
+  color: red;
+}
+
+.input {
+  width: 300px;
+}
+
+.tooltipp {
+  border: none;
+  right: 0;
+  margin: 5px 45px 2px 2px;
+  position: absolute;
+  padding: 0
+}
+
+.tooltipp:not(:disabled):not(.disabled):hover {
+  color: #6c757d;
+  background-color: #fff;
+  border-color: #fff;
+}
+
+.containerSection {
+  height: 60vh;
+}
+
+tbody {
+  display: block;
+  max-height: 500px;
+  overflow-y: auto;
+}
+
+thead,
+tbody tr {
+  display: table;
+  width: 100%;
+  table-layout: fixed;
+}
+
+thead {
+  width: calc(100% - 1em)
+}

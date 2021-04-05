@@ -51,6 +51,7 @@ export class FormModalComponent implements OnInit {
   private initializeData(): void {
     this.dataManagementService.organizeDataView('texts', FORM.form, this.dataView.parametricTexts);
     this.productFormService.getModal().subscribe(response => {
+      console.log('DATA RECIBIDA EN EL FORMULARIO', response);
       if (response) {
         this.showModal = (response.activateModal) ? true : false;
         this.activateInput = (response.activateInput) ? true : false;
@@ -133,6 +134,7 @@ export class FormModalComponent implements OnInit {
       });
     } else {
       this.workflowSrv.getEmployesById(valueForm.idEmployee).subscribe((response) => {
+        console.log('CONSULTA EMPLEADO', response);
         if (response[0]) {
           this.activateMessages = `El usuario con número de empleado ${response[0].idEmployee} ya existe`;
         } else {

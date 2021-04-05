@@ -37,29 +37,29 @@ export class EmployeesComponent implements OnInit {
   }
 
   public onInputHandler(event) {
-    this.filterEmployee = event.target.value;
-  }
+  this.filterEmployee = event.target.value;
+}
 
   public showForm(state) {
-    this.productFormService.showModal({
-      activateModal: state,
-      activateInput: false
-    });
-  }
+  this.productFormService.showModal({
+    activateModal: state,
+    activateInput: false
+  });
+}
 
   public onAction(action, data): void {
-    if (action === "edit") {
-      this.productFormService.showModal({
-        activateModal: true,
-        activateInput: false,
-        dataForm: data
-      });
-    } else {
-      this.workflowSrv.deleteEmployee(data.idEmployee).subscribe((response) => {
-        console.log(response);
-        this.router.navigate(['/f']);
-      });
-    }
+  if(action === "edit") {
+  this.productFormService.showModal({
+    activateModal: true,
+    activateInput: false,
+    dataForm: data
+  });
+} else {
+  this.workflowSrv.deleteEmployee(data.idEmployee).subscribe((response) => {
+    console.log(response);
+    this.router.navigate(['/f']);
+  });
+}
   }
 
 }
