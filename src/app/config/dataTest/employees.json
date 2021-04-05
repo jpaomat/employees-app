@@ -12,8 +12,8 @@
                 {
                     "search": [
                         {
-                            "placeholder": "Buscar producto",
-                            "tooltip": "Ingrese la referencia del producto"
+                            "placeholder": "Buscar empleado",
+                            "tooltip": "Ingrese el número de empleado"
                         }
                     ]
                 }

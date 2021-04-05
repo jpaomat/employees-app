@@ -4,6 +4,7 @@ import { RouterWorflowService } from 'src/app/core/services/router-workflow/rout
 import EMPLOYEES from 'src/app/config/dataTest/employees.json';
 import { DataManagementService } from 'src/app/core/services/dataManagement/data-management.service';
 import { ProductFormModalService } from 'src/app/core/services/productFormModal/product-form-modal.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-employees',
@@ -12,12 +13,6 @@ import { ProductFormModalService } from 'src/app/core/services/productFormModal/
 })
 export class EmployeesComponent implements OnInit {
 
-  private employee = {
-    idEmployee: "1835",
-    fullname: "Jose Cardona",
-    occupation: "ingeniero",
-    idBoss: "1234"
-  };
   public filterEmployee: string;
   public dataView = {
     parametricTexts: {
@@ -26,19 +21,18 @@ export class EmployeesComponent implements OnInit {
     }
   };
   public employeesRegistered;
-  public fieldsTable = ['ID empleado', 'Nombre', 'Cargo', 'Jefe inmediato']
 
   constructor(
     private workflowSrv: RouterWorflowService,
     private dataManagementSrv: DataManagementService,
-    private productFormService: ProductFormModalService
+    private productFormService: ProductFormModalService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
     this.dataManagementSrv.organizeDataView('texts', EMPLOYEES.dataTable, this.dataView.parametricTexts);
     this.workflowSrv.getEmployes().subscribe((employees) => {
       this.employeesRegistered = employees;
-      console.log('ENPLOYEES', employees);
     });
   }
 
@@ -61,7 +55,10 @@ export class EmployeesComponent implements OnInit {
         dataForm: data
       });
     } else {
-      this.workflowSrv.deleteEmployee(data.idEmployee);
+      this.workflowSrv.deleteEmployee(data.idEmployee).subscribe((response) => {
+        console.log(response);
+        this.router.navigate(['/f']);
+      });
     }
   }
 

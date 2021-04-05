@@ -8,12 +8,9 @@
                 <input type="text" class="form-control"
                     [placeholder]="dataView.parametricTexts.header[1].search[0].placeholder"
                     (input)="onInputHandler($event)">
-                <button class="btn btn-outline-secondary tooltipp" type="button" placement="top"
+                <button class="btn btn-outline-secondary" type="button" placement="left"
                     [ngbTooltip]="dataView.parametricTexts.header[1].search[0].tooltip">
                     <i class="fas fa-question-circle"></i>
-                </button>
-                <button class="btn btn-outline-secondary" type="button">
-                    <i class="fas fa-search"></i>
                 </button>
             </div>
         </div>
@@ -35,7 +32,7 @@
                 <td *ngFor="let columns of dataView.parametricTexts.table">
                     {{employee[columns.field]}}
                 </td>
-                <td >
+                <td>
                     <i class="far fa-edit m-2" (click)="onAction('edit', employee)"></i>
                     <i class="far fa-trash-alt m-2" (click)="onAction('delete', employee)"></i>
                 </td>
