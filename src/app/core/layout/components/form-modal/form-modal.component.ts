@@ -127,6 +127,9 @@ export class FormModalComponent implements OnInit {
     if (this.editData) {
       this.workflowSrv.editEmployee(this.editData, valueForm).subscribe((response) => {
         console.log(response);
+        this.initializeForm();
+        this.onClose(false);
+        this.router.navigate(['/f']);
       });
     } else {
       this.workflowSrv.getEmployesById(valueForm.idEmployee).subscribe((response) => {
