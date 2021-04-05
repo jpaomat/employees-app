@@ -1,8 +1,8 @@
 export interface Modal {
     activateModal: boolean;
     activateInput: boolean;
-    textsProductForm?: any;
-    dataProductForm?: any;
+    textsForm?: any;
+    dataForm?: any;
 }
 
 export interface Employee {

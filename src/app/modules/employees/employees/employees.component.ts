@@ -56,18 +56,14 @@ export class EmployeesComponent implements OnInit {
   public onAction(action, data): void {
     console.log(action, data);
     if (action === "edit") {
-      this.workflowSrv.getEmployesById(data.idEmployee).subscribe((employee) => {
-        console.log('GET ENPLOYEE', employee);
-      });
-      this.workflowSrv.editEmployee(data.id, data).subscribe((response) => {
-        console.log('EDIT ENPLOYEE', response);
-      });
-
       this.productFormService.showModal({
         activateModal: true,
-        activateInput: false
+        activateInput: false,
+        dataForm: data
       });
-
+      // this.workflowSrv.getEmployesById(data.idEmployee).subscribe((employee) => {
+      //   console.log('GET ENPLOYEE', employee);
+      // });
     } else {
       this.workflowSrv.deleteEmployee(data.idEmployee).subscribe((response) => {
         console.log('DELETE ENPLOYEE', response);
