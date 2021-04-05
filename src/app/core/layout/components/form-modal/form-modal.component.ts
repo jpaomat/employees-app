@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Subscription } from 'rxjs';
 import { ProductFormModalService } from 'src/app/core/services/productFormModal/product-form-modal.service';
 
 import { Router } from '@angular/router';
+import FORM from 'src/app/config/dataTest/form.json';
 import { DataManagementService } from 'src/app/core/services/dataManagement/data-management.service';
 import { RouterWorflowService } from 'src/app/core/services/router-workflow/router-worflow.service';
 
-import FORM from 'src/app/config/dataTest/form.json';
 @Component({
   selector: 'app-form-modal',
   templateUrl: './form-modal.component.html',
@@ -18,6 +19,9 @@ export class FormModalComponent implements OnInit {
   public activateInput: boolean;
   public sectionInput: boolean;
   public registerForm: FormGroup;
+  // public inventoryForm: FormGroup;
+  // public categories: string[];
+  // public category: string;
   public title: string;
   public header: string;
   private editData: any = '';
@@ -52,6 +56,7 @@ export class FormModalComponent implements OnInit {
         this.getTexts();
         /* istanbul ignore else*/
         if (this.showModal) {
+          // console.log('data recibida en modal', response, this.activateInput);
           if (response.dataForm) {
             this.editData = response.dataForm.id;
             this.preloadData(response.dataForm);
@@ -60,7 +65,7 @@ export class FormModalComponent implements OnInit {
         }
       }
     });
-    console.log('textos parámetricos form', this.dataView);
+    // console.log('textos parámetricos form', this.dataView);
   }
 
   private initializeForm(): void {
@@ -111,14 +116,18 @@ export class FormModalComponent implements OnInit {
 
   public onCall(): void {
     let valueForm = this.registerForm.value;
-    console.log('Data enviada del form', valueForm);
+    console.log('Data enviada del formulario', valueForm);
     if (this.editData) {
-      this.workflowSrv.editEmployee(this.editData, valueForm);
+      this.workflowSrv.editEmployee(this.editData, valueForm).subscribe((response) => {
+        console.log(response);
+      });
     } else {
-      this.workflowSrv.createEmployee(valueForm);
+      this.workflowSrv.createEmployee(valueForm).subscribe((response) => {
+        console.log(response);
+      });
     }
     this.initializeForm();
     this.onClose(false);
-    this.router.navigate(['/employees']);
+    this.router.navigate(['/f']);
   }
 }
