@@ -19,7 +19,7 @@ export class FormModalComponent implements OnInit {
   public activateInput: boolean;
   public sectionInput: boolean;
   public registerForm: FormGroup;
-  public activateMessages: string= '';
+  public activateMessages: string = '';
   // public inventoryForm: FormGroup;
   // public categories: string[];
   // public category: string;
@@ -61,7 +61,7 @@ export class FormModalComponent implements OnInit {
             this.editData = response.dataForm.id;
             this.preloadData(response.dataForm);
             return;
-          } 
+          }
         }
       }
     });
@@ -135,12 +135,12 @@ export class FormModalComponent implements OnInit {
         } else {
           this.workflowSrv.createEmployee(valueForm).subscribe((response) => {
             console.log(response);
+            this.initializeForm();
+            this.onClose(false);
+            this.router.navigate(['/f']);
           });
         }
       });
     }
-    this.initializeForm();
-    this.onClose(false);
-    this.router.navigate(['/f']);
   }
 }

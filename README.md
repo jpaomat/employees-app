@@ -1,23 +1,26 @@
 # employees-app
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.2.0.
+En esta aplicación podrá registrar nuevos empleados, elimininarlos, actualizarlos y  consultarlos.
+
+## Instalación
+***
+Use los siguientes comandos:
+```
+$ git clone https://github.com/jpaomat/employees-app.git
+$ npm i
+$ ng s -o
+$ ng test --code-coverage
+```
 
 ## Development server
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+Ejecutar `ng serve` para ejecutar el servidor. Navega a `http://localhost:4200/`. La aplicación se recarga automaticamente si se realiza algun cambio en el código mientras se ejecuta.
 
-## Code scaffolding
+## Dependencias
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Ejecutar `npm i` para instalar las dependencias necesarias para ejecutar la aplicación.
 
-## Build
+## Pruebas unitarias
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+Ejecutar `ng test --code-coverage` para ejecutar las pruebas unitarias via [Karma](https://karma-runner.github.io).
 
-## Running unit tests
-
-Run `ng test --code-coverage` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
