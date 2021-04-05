@@ -9,18 +9,29 @@ input {
   border-radius: 3px !important;
 }
 
-.buttonsInput{
-    justify-content: space-around;
+.buttonsInput {
+  justify-content: space-around;
 }
+
 .btn-outline-success {
   color: #aa8bdbb7;
   border-color: #aa8bdbb7;
 }
-.btn-outline-success:hover, .btn-outline-success:not(:disabled):not(.disabled):active {
+
+.btn-outline-success:hover,
+.btn-outline-success:not(:disabled):not(.disabled):active {
   color: #fff;
   background-color: #aa8bdbb7;
   border-color: #aa8bdbb7;
 }
-.btn-outline-success:focus, .btn-outline-success.focus {
+
+.btn-outline-success:focus,
+.btn-outline-success.focus {
   box-shadow: 0 0 0 0.2rem #aa8bdbb7;
 }
+
+.message {
+  background-color: rgba(241, 146, 162, 0.418);
+  border-radius: 4px;
+}
+

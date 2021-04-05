@@ -8,7 +8,8 @@
         </div>
         <div class="modal-body">
             <p class="mb-4" [innerHTML]="header"></p>
-            <div *ngIf="activateInput && !sectionInput" class="d-flex align-items-center buttonsInput p-6">
+            <div *ngIf="activateInput && !sectionInput && !activateMessages"
+                class="d-flex align-items-center buttonsInput p-6">
                 <button type="button" class="btn btn-lg btn-outline-secondary" (click)="onClick('add')">
                     {{dataView.parametricTexts.buttons[0].labelbtn2}}
                 </button>
@@ -38,14 +39,16 @@
                         </div>
                         <div class="col-md-6">
                             <input type="text" class="form-control"
-                                [placeholder]="dataView.parametricTexts.placeholders[0].text4"
-                                formControlName="idBoss">
+                                [placeholder]="dataView.parametricTexts.placeholders[0].text4" formControlName="idBoss">
                         </div>
                     </div>
                 </div>
             </form>
         </div>
-        <div class="modal-footer" *ngIf="!activateInput || sectionInput">
+        <div class="modal-footer align-items-between" *ngIf="!activateInput || sectionInput">
+            <div class="message" *ngIf="activateMessages">
+                <p [innerHTML]="activateMessages" id="user_exist"></p>
+            </div>
             <button type="button" class="btn btn-outline-info" [disabled]="validateForm()" (click)="onCall()">
                 {{dataView.parametricTexts.buttons[0].labelbtn1}}
             </button>

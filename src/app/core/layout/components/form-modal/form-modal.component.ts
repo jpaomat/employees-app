@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { ProductFormModalService } from 'src/app/core/services/productFormModal/product-form-modal.service';
@@ -19,6 +19,7 @@ export class FormModalComponent implements OnInit {
   public activateInput: boolean;
   public sectionInput: boolean;
   public registerForm: FormGroup;
+  public activateMessages: string= '';
   // public inventoryForm: FormGroup;
   // public categories: string[];
   // public category: string;
@@ -56,12 +57,11 @@ export class FormModalComponent implements OnInit {
         this.getTexts();
         /* istanbul ignore else*/
         if (this.showModal) {
-          // console.log('data recibida en modal', response, this.activateInput);
           if (response.dataForm) {
             this.editData = response.dataForm.id;
             this.preloadData(response.dataForm);
-          }
-          return;
+            return;
+          } 
         }
       }
     });
@@ -101,6 +101,13 @@ export class FormModalComponent implements OnInit {
     }
   }
 
+  @HostListener('window:click', ['$event'])
+  onClickHandler(event: any): void {
+    if ((event.target as HTMLElement).id !== "user_exist") {
+      this.activateMessages = '';
+    }
+  }
+
   public validateForm() {
     return (this.registerForm.valid) ? false : true;
   }
@@ -122,12 +129,19 @@ export class FormModalComponent implements OnInit {
         console.log(response);
       });
     } else {
-      this.workflowSrv.createEmployee(valueForm).subscribe((response) => {
-        console.log(response);
+      this.workflowSrv.getEmployesById(valueForm.idEmployee).subscribe((response) => {
+        if (response[0]) {
+          console.log(`El usuario con número de empleado ${response[0].idEmployee} ya existe`);
+          this.activateMessages = `El usuario con número de empleado ${response[0].idEmployee} ya existe`;
+        } else {
+          this.workflowSrv.createEmployee(valueForm).subscribe((response) => {
+            console.log(response);
+          });
+        }
       });
     }
-    this.initializeForm();
-    this.onClose(false);
-    this.router.navigate(['/f']);
+    // this.initializeForm();
+    // this.onClose(false);
+    // this.router.navigate(['/f']);
   }
 }

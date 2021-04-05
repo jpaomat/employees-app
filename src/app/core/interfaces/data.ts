@@ -1,6 +1,7 @@
 export interface Modal {
     activateModal: boolean;
     activateInput: boolean;
+    activateMessages?: boolean;
     textsForm?: any;
     dataForm?: any;
 }
