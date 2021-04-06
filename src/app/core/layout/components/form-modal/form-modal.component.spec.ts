@@ -64,6 +64,7 @@ describe('FormModalComponent', () => {
   });
 
   it('should close the modal', () => {
+    spyOn(component.router, 'navigate').and.returnValue(Promise.resolve(true));
     component.onClose(false);
     expect(component).toBeTruthy();
   });
@@ -85,6 +86,7 @@ describe('FormModalComponent', () => {
   });
 
   it('should add or delete employees', () => {
+    spyOn(component.router, 'navigate').and.returnValue(Promise.resolve(true));
     component.onClick('add');
     component.onClick('delete');
     expect(component).toBeTruthy();
