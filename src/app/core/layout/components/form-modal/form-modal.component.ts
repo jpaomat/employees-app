@@ -20,12 +20,10 @@ export class FormModalComponent implements OnInit {
   public sectionInput: boolean;
   public registerForm: FormGroup;
   public activateMessages: string = '';
-  // public inventoryForm: FormGroup;
-  // public categories: string[];
-  // public category: string;
   public title: string;
   public header: string;
-  private editData: any = '';
+  public click: boolean = true;
+  public editData: any = '';
   public dataView = {
     parametricTexts: {
       title: [],
@@ -123,6 +121,7 @@ export class FormModalComponent implements OnInit {
   }
 
   public onCall(): void {
+    this.click = false;
     let valueForm = this.registerForm.value;
     console.log('Data enviada del formulario', valueForm);
     if (this.editData) {

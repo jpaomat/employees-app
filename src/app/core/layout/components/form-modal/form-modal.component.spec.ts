@@ -1,3 +1,4 @@
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { AngularFireModule } from '@angular/fire';
 import { FormBuilder } from '@angular/forms';
@@ -6,32 +7,40 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { of } from 'rxjs';
 import { DataManagementService } from 'src/app/core/services/dataManagement/data-management.service';
 import { ProductFormModalService } from 'src/app/core/services/productFormModal/product-form-modal.service';
+import { RouterWorflowService } from 'src/app/core/services/router-workflow/router-worflow.service';
 import { environment } from 'src/environments/environment';
 
-import { ProductFormModalComponent } from './form-modal.component';
+import { FormModalComponent } from './form-modal.component';
 
-describe('ProductFormModalComponent', () => {
-  let component: ProductFormModalComponent;
-  let fixture: ComponentFixture<ProductFormModalComponent>;
+describe('FormModalComponent', () => {
+  let component: FormModalComponent;
+  let fixture: ComponentFixture<FormModalComponent>;
+  let dataTest = {
+    idEmployee: '123',
+    fullname: 'Jose',
+    occupation: 'Gerente',
+    idBoss: '456'
+  }
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ProductFormModalComponent ],
+      declarations: [FormModalComponent],
       imports: [
         RouterTestingModule,
-        // AngularFireModule.initializeApp(environment.firebaseConfig)
+        HttpClientModule
       ],
       providers: [
         ProductFormModalService,
         FormBuilder,
-        DataManagementService
+        DataManagementService,
+        HttpClient
       ]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ProductFormModalComponent);
+    fixture = TestBed.createComponent(FormModalComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
@@ -41,24 +50,13 @@ describe('ProductFormModalComponent', () => {
   });
 
   it('should get data in ngOnint and activate the modal', async(() => {
+    spyOn(component.router, 'navigate').and.returnValue(Promise.resolve(true));
     spyOn(TestBed.inject(ProductFormModalService), 'getModal').and.returnValue(of({
-      activateModal: true,
-      textsProductForm: 'data to show on product form layout',
-      dataProductForm: 'data product form'
+      activateModal: true
     }));
     component.ngOnInit();
     expect(component).toBeTruthy();
   }));
-
-  it('should get the information image and save it', () => {
-    let event = {
-      target: {
-        files: []
-      }
-    };
-    component.captureImage(event);
-    expect(component).toBeTruthy();
-  });
 
   it('should validate if the form was completed correctly', () => {
     component.validateForm();
@@ -71,7 +69,30 @@ describe('ProductFormModalComponent', () => {
   });
 
   it('should send the data to the databse', () => {
+    // spyOn(TestBed.inject(RouterWorflowService), 'editEmployee').and.returnValue(of({
+    //   message: 'employee created'
+    // }));
+    // component.editData = '';
     component.onCall();
+    component.editData = 'data';
+    component.onCall();
+    expect(component).toBeTruthy();
+  });
+
+  it('should preload data in form', () => {
+    component.preloadData(dataTest);
+    expect(component).toBeTruthy();
+  });
+
+  it('should add or delete employees', () => {
+    component.onClick('add');
+    component.onClick('delete');
+    expect(component).toBeTruthy();
+  });
+
+  it('should show error', () => {
+    component.onClickHandler({target: {id: 'a'}});
+    component.onClickHandler({target: {id: 'user_exist'}});
     expect(component).toBeTruthy();
   });
 });

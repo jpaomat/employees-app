@@ -15,7 +15,6 @@ describe('AppComponent', () => {
         NgbModule,
         ComponentsModule,
         HttpClientModule,
-        AngularFireModule.initializeApp(environment.firebaseConfig)
       ],
       declarations: [
         AppComponent
@@ -29,12 +28,5 @@ describe('AppComponent', () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
     expect(app).toBeTruthy();
-  });
-
-  it(`should have as title 'store-todo1'`, () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.componentInstance;
-    app.ngOnInit();
-    expect(app.title).toEqual('store-todo1');
   });
 });

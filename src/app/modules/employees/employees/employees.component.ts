@@ -26,7 +26,7 @@ export class EmployeesComponent implements OnInit {
     private workflowSrv: RouterWorflowService,
     private dataManagementSrv: DataManagementService,
     private productFormService: ProductFormModalService,
-    private router: Router
+    public router: Router
   ) { }
 
   ngOnInit(): void {

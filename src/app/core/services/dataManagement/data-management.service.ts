@@ -27,16 +27,4 @@ export class DataManagementService {
     }
   }
 
-  public getProductsWithOffer(products){
-    let keysProducts = Object.keys(products);
-    let productsWithDiscount = [];
-    keysProducts.forEach(product => {
-      products[product].forEach(element => {
-        if (element.discount > 0) {
-          productsWithDiscount.push(element);
-        }
-      });
-    });
-    return productsWithDiscount;
-  }
 }

@@ -21,7 +21,6 @@ import { UiComponentsModule } from './core/layout/ui-components/ui-components.mo
     AppRoutingModule,
     NgbModule,
     ComponentsModule,
-    AngularFireModule.initializeApp(environment.firebaseConfig),
     HttpClientModule
   ],
   bootstrap: [AppComponent]
