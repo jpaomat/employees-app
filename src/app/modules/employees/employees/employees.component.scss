@@ -40,3 +40,50 @@ tbody tr {
 thead {
   width: calc(100% - 1em)
 }
+
+.addProducts {
+  display: block !important;
+}
+
+.card-header {
+  padding: 2px;
+}
+
+.card-body {
+  padding: 4px;
+}
+
+.card-footer {
+  padding: 0.3rem 2.25rem;
+}
+
+.cards {
+  display: none;
+}
+
+@media (max-width:600px) {
+  h5 {
+    font-size: 1rem;
+  }
+
+  .table,
+  .input-group>.form-control {
+    font-size: 13px;
+  }
+
+  th {
+    font-size: 11px;
+  }
+
+  .addProduct {
+    display: block;
+  }
+
+  .table {
+    display: none;
+  }
+
+  .cards {
+    display: block;
+  }
+}
