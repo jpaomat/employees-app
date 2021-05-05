@@ -38,8 +38,12 @@
                                 formControlName="occupation">
                         </div>
                         <div class="col-md-6">
-                            <input type="text" class="form-control"
-                                [placeholder]="dataView.parametricTexts.placeholders[0].text4" formControlName="idBoss">
+                            <!-- <input type="text" class="form-control"
+                                [placeholder]="dataView.parametricTexts.placeholders[0].text4" formControlName="idBoss"> -->
+                            <select name="idBoss" id="idBoss" class="form-control form-select" formControlName="idBoss">
+                                <option selected>{{dataView.parametricTexts.placeholders[0].text4}}</option>
+                                <option *ngFor="let employee of employeesRegistered">{{employee.idEmployee}}</option>
+                            </select>
                         </div>
                     </div>
                 </div>

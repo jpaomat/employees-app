@@ -32,7 +32,8 @@ export class EmployeesComponent implements OnInit {
   ngOnInit(): void {
     this.dataManagementSrv.organizeDataView('texts', EMPLOYEES.dataTable, this.dataView.parametricTexts);
     this.workflowSrv.getEmployes().subscribe((employees) => {
-      this.employeesRegistered = employees;
+      console.log('employees', employees);
+      this.employeesRegistered = employees.data;
     });
   }
 
@@ -43,19 +44,22 @@ export class EmployeesComponent implements OnInit {
   public showForm(state) {
   this.productFormService.showModal({
     activateModal: state,
-    activateInput: false
+    activateInput: false,
+    dataEmployees: this.employeesRegistered
   });
 }
 
   public onAction(action, data): void {
+    console.log('DATA', data)
   if(action === "edit") {
   this.productFormService.showModal({
     activateModal: true,
     activateInput: false,
-    dataForm: data
+    dataForm: data,
+    dataEmployees: this.employeesRegistered
   });
 } else {
-  this.workflowSrv.deleteEmployee(data.idEmployee).subscribe((response) => {
+  this.workflowSrv.deleteEmployee(data.id).subscribe((response) => {
     console.log(response);
     this.router.navigate(['/f']);
   });

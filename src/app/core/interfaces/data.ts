@@ -4,6 +4,7 @@ export interface Modal {
     activateMessages?: boolean;
     textsForm?: any;
     dataForm?: any;
+    dataEmployees?: any; 
 }
 
 export interface Employee {

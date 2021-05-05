@@ -1,6 +1,5 @@
 import { Component, HostListener, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Subscription } from 'rxjs';
 import { ProductFormModalService } from 'src/app/core/services/productFormModal/product-form-modal.service';
 
 import { Router } from '@angular/router';
@@ -24,6 +23,7 @@ export class FormModalComponent implements OnInit {
   public header: string;
   public click: boolean = true;
   public editData: any = '';
+  public employeesRegistered: any;
   public dataView = {
     parametricTexts: {
       title: [],
@@ -56,6 +56,7 @@ export class FormModalComponent implements OnInit {
         this.getTexts();
         /* istanbul ignore else*/
         if (this.showModal) {
+          this.employeesRegistered = response.dataEmployees;
           if (response.dataForm) {
             this.editData = response.dataForm.id;
             this.preloadData(response.dataForm);
@@ -64,7 +65,10 @@ export class FormModalComponent implements OnInit {
         }
       }
     });
-    // console.log('textos parámetricos form', this.dataView);
+    // this.workflowSrv.getEmployes().subscribe((employees) => {
+    //   console.log('employees desde form', employees);
+    //   this.employeesRegistered = employees.data;
+    // });
   }
 
   private initializeForm(): void {
@@ -104,11 +108,12 @@ export class FormModalComponent implements OnInit {
   onClickHandler(event: any): void {
     if ((event.target as HTMLElement).id !== "user_exist") {
       this.activateMessages = '';
+      this.click = true;
     }
   }
 
   public validateForm() {
-    return (this.registerForm.valid) ? false : true;
+    return (this.registerForm.valid && !this.activateMessages ) ? false : true;
   }
 
   public onClose(state): void {
@@ -117,13 +122,13 @@ export class FormModalComponent implements OnInit {
       activateInput: false
     });
     this.initializeForm();
-    this.router.navigate(['/employees']);
+    this.router.navigate(['/employees']); 
   }
 
   public onCall(): void {
     this.click = false;
     let valueForm = this.registerForm.value;
-    console.log('Data enviada del formulario', valueForm);
+    console.log('Data enviada del formulario', this.editData, valueForm);
     if (this.editData) {
       this.workflowSrv.editEmployee(this.editData, valueForm).subscribe((response) => {
         console.log(response);
@@ -133,9 +138,8 @@ export class FormModalComponent implements OnInit {
       });
     } else {
       this.workflowSrv.getEmployesById(valueForm.idEmployee).subscribe((response) => {
-        console.log('CONSULTA EMPLEADO', response);
-        if (response[0]) {
-          this.activateMessages = `El usuario con número de empleado ${response[0].idEmployee} ya existe`;
+        if (response.data[0]) {
+          this.activateMessages = `El usuario con número de empleado ${response.data[0].idEmployee}, ya existe`;
         } else {
           this.workflowSrv.createEmployee(valueForm).subscribe((response) => {
             console.log(response);
