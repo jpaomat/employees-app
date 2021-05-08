@@ -13,7 +13,8 @@ export const environment = {
     appId: "1:726837350427:web:073ab2522f8859c569e8be"
   },
   // BASE_URL : 'http://127.0.0.1:8888/employees'
-  BASE_URL : 'https://q01d9jqdze.execute-api.us-east-1.amazonaws.com/dev/employees'
+  BASE_URL: "https://7pr28kbw5l.execute-api.us-east-1.amazonaws.com/dev/employees"
+  // BASE_URL: 'https://q01d9jqdze.execute-api.us-east-1.amazonaws.com/dev/employees'
 };
 //2DaKY8D58us2yubcfkvo
 /*
